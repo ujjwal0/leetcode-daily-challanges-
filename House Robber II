@@ -1,0 +1,33 @@
+question-> 
+ House Robber II
+ 
+ solution->
+ 
+ 
+ class Solution {
+public:
+    int solve(vector<int> &nums,int st,int end){
+    int prev1=nums[st];
+    int prev2=0;
+    
+    for(int i=st+1;i<=end;i++){
+        int take =nums[i]+prev2;
+        int nontake=prev1;
+        int curri=max(take,nontake);
+        prev2=prev1;
+        prev1=curri;
+    }
+    return prev1;
+    }
+    int rob(vector<int>& nums) {
+        
+        int n=nums.size()-1;
+        
+        if(n==0){
+            return nums[0];
+        }
+        int ans1=solve(nums,1,n);
+        int ans2=solve(nums,0,n-1);
+        return max(ans1,ans2);
+    }
+};
